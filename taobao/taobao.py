@@ -4,7 +4,7 @@ import urllib2
 import json
 import os
 
-
+#获取图片链接
 def get_image_urls():
     url = 'https://mm.taobao.com/tstar/search/tstar_model.do?_input_charset=utf-8'
     req = urllib2.Request(url)
@@ -19,7 +19,7 @@ def get_image_urls():
         urls.append(i['cardUrl'])
     return urls
 
-
+#下载图片
 def down_images():
     urls = get_image_urls()
 
@@ -32,6 +32,7 @@ def down_images():
 
     i = 1
     for url in urls:
+        #有的图片链接会有问题，所以使用try—except直接跳过错误的链接
         try:
             image_url = 'https:' + url
             data = urllib2.urlopen(image_url).read()
@@ -44,5 +45,6 @@ def down_images():
         except:
             pass
 
-
 down_images()
+
+
