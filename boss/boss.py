@@ -5,9 +5,7 @@ import urllib
 import cookielib
 import json
 
-# 登录地址
-login_url = 'https://login.zhipin.com/'
-# 二维码请求地址
+# 登录验证url
 login_action_url = 'https://login.zhipin.com/login/account.json'
 
 headers = {
@@ -17,15 +15,15 @@ headers = {
     'Referer': 'https://login.zhipin.com/'
 }
 
-
+#这个不重要
 randomKey = 'Bt8lEnlYPN4p3k8igDL51c9xYBtehN4D'
 
 while True:
-
+    #创建cookie
     cookie = cookielib.CookieJar()
     handler = urllib2.HTTPCookieProcessor(cookie)
     opener = urllib2.build_opener(handler)
-
+    #获取验证码并保存
     QR_image = opener.open('https://login.zhipin.com/'
                            'captcha/?randomKey=' + randomKey +
                            '&_r=1504767809869').read()
@@ -64,7 +62,7 @@ while True:
 
     else:
         print '未知错误'
-
+#打印cookie信息
 for item in cookie:
     print item.name
     print item.value
